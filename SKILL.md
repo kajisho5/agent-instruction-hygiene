@@ -115,16 +115,18 @@ check back once the first pass is in place." Without that, the model tends
 to stop short. The same goes for how far to explore — spell out the scope
 and the stopping condition.
 
-## Quick Reference
+## How to Apply
 
-| What to audit | Check |
-|---|---|
-| Skill description | Does it state only the trigger condition, with no workflow summary mixed in? Is it under ~500 characters? |
-| Skill body structure | Is every workflow crammed into one file, or could heavy content move to supporting files? |
-| How steps are written | Is it over-scripted into rigid steps that remove room for situational judgment? |
-| CLAUDE.md/AGENTS.md | Any leftover "read everything, every time" instructions? Are the referenced docs still current? |
-| Confirmation requirements | Does old, strongly worded "always confirm" language now constrain even safe, routine work? |
-| Task prompts | Is the completion criterion (what counts as "done") stated explicitly? |
+1. Inventory the instruction files in scope for this pass: skill
+   descriptions/bodies, CLAUDE.md/AGENTS.md, and any templated task prompts.
+2. Walk each file against `references/checklist.md` — open it only when
+   actually running an audit, not on every invocation of this skill.
+3. Rewrite only the items the checklist flags, using the patterns above.
+   This is an audit, not a rewrite-everything pass — leave what isn't
+   flagged alone.
+4. Leave the one-line audit-trail note described in the checklist so the
+   next pass knows the baseline it's revising instead of re-deriving it
+   from scratch.
 
 ## Common Mistakes
 
