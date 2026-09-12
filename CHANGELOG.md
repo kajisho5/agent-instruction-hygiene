@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0
+
+- `bin/install.js` + `package.json`: install into Claude Code, Cursor, or
+  Codex's skills directory (`--claude`/`--cursor`/`--codex`/`--all`), the
+  current project (`--project`), or a custom directory (`--dir`), plus
+  `--uninstall`. Not published to npm — run via `npx github:kajisho5/agent-instruction-hygiene`.
+
 ## 1.0.0
 
 - `SKILL.md`: six core patterns for auditing skill descriptions,
