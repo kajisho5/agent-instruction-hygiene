@@ -60,6 +60,13 @@ npx github:kajisho5/agent-instruction-hygiene --uninstall     # remove from the 
 
 Already installed? Re-run the same command to refresh — copies aren't updated automatically.
 
+Once a version has been published to npm (see [Releasing](#releasing) below), the shorter form
+also works, with the same flags:
+
+```bash
+npx agent-instruction-hygiene
+```
+
 Or copy it in by hand, for any agent that reads a `SKILL.md` off disk:
 
 ```bash
@@ -77,6 +84,19 @@ cp -r agent-instruction-hygiene/SKILL.md agent-instruction-hygiene/references <y
 6. **Define "done" before the task starts.** State explicitly whether the first working pass is the finish line or the starting point.
 
 Full detail, examples, and the audit workflow: [`SKILL.md`](SKILL.md).
+
+## Releasing
+
+Bump the `version` field in `package.json` (and `.claude-plugin/plugin.json` to match) in a PR
+and merge it to `main`. [`.github/workflows/publish.yml`](.github/workflows/publish.yml) then
+compares that version against what's currently on npm and, if it's newer, runs `npm publish`,
+tags the commit `vX.Y.Z`, and creates a GitHub Release — no manual `npm publish` needed.
+
+This needs an `NPM_TOKEN` repository secret (an npm access token with publish rights on this
+package): **Settings → Secrets and variables → Actions →
+[New repository secret](https://github.com/kajisho5/agent-instruction-hygiene/settings/secrets/actions/new)**.
+Without it, the workflow's publish step fails (a tag/release is only created for a successful
+publish) and the package stays install-only via `npx github:kajisho5/agent-instruction-hygiene`.
 
 ## Contributing
 

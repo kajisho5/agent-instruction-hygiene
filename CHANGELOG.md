@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0
+
+- `.github/workflows/publish.yml`: on a `main`-branch push that changes
+  `package.json`, publish to npm if that version isn't already published,
+  then tag the commit and create a GitHub Release. Needs an `NPM_TOKEN`
+  repository secret; see [Releasing](README.md#releasing) in the README.
+
 ## 1.1.0
 
 - `bin/install.js` + `package.json`: install into Claude Code, Cursor, or

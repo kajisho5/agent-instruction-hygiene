@@ -1,6 +1,6 @@
 {
   "name": "agent-instruction-hygiene",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Audit and rewrite skill descriptions, CLAUDE.md/AGENTS.md, and task prompts that were tuned for older, less capable models and now over-constrain a high-capability one.",
   "bin": {
     "agent-instruction-hygiene": "bin/install.js"
