@@ -1,0 +1,34 @@
+{
+  "name": "agent-instruction-hygiene",
+  "version": "1.2.0",
+  "description": "Audit and rewrite skill descriptions, CLAUDE.md/AGENTS.md, and task prompts that were tuned for older, less capable models and now over-constrain a high-capability one.",
+  "bin": {
+    "agent-instruction-hygiene": "bin/install.js"
+  },
+  "files": [
+    "bin",
+    "SKILL.md",
+    "references",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kajisho5/agent-instruction-hygiene.git"
+  },
+  "homepage": "https://github.com/kajisho5/agent-instruction-hygiene",
+  "bugs": "https://github.com/kajisho5/agent-instruction-hygiene/issues",
+  "keywords": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "skill",
+    "agents",
+    "prompt-engineering",
+    "claude-md"
+  ],
+  "license": "MIT"
+}

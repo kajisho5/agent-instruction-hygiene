@@ -8,9 +8,12 @@
   <a href="https://github.com/kajisho5/agent-instruction-hygiene/stargazers"><img src="https://img.shields.io/github/stars/kajisho5/agent-instruction-hygiene" alt="GitHub stars"></a>
 </p>
 
-`agent-instruction-hygiene` is a [Claude Code Skill](https://code.claude.com/docs/en/skills) — not a
+`agent-instruction-hygiene` is an [Agent Skill](https://code.claude.com/docs/en/skills) — not a
 code tool, but a judgment framework for the instructions *you* write for an
-agent: skill descriptions, `CLAUDE.md`/`AGENTS.md`, and task prompts.
+agent: skill descriptions, `CLAUDE.md`/`AGENTS.md`, and task prompts. It's
+plain Markdown, so it works anywhere an agent can read a `SKILL.md`:
+Claude Code, Cursor, Codex, or any framework that reads instructions off
+disk.
 
 ---
 
@@ -36,17 +39,39 @@ model-agnostic, not tied to any specific vendor or release.
 
 ## Install
 
-As a Claude Code plugin (recommended — stays up to date with `claude plugin update`):
+As a Claude Code plugin (recommended for Claude Code — stays up to date with `claude plugin update`):
 
 ```bash
 claude plugin install kajisho5/agent-instruction-hygiene
 ```
 
-Or copy it in by hand:
+For Claude Code, Cursor, or Codex via the bundled installer — not published to npm, so run it
+straight from GitHub:
+
+```bash
+npx github:kajisho5/agent-instruction-hygiene                # Claude Code -> ~/.claude/skills/agent-instruction-hygiene
+npx github:kajisho5/agent-instruction-hygiene --cursor        # Cursor      -> ~/.cursor/skills/agent-instruction-hygiene
+npx github:kajisho5/agent-instruction-hygiene --codex         # Codex       -> ~/.agents/skills/agent-instruction-hygiene
+npx github:kajisho5/agent-instruction-hygiene --all           # all three
+npx github:kajisho5/agent-instruction-hygiene --project       # this project -> ./.claude/skills/agent-instruction-hygiene
+npx github:kajisho5/agent-instruction-hygiene --dir ./skills  # custom parent directory
+npx github:kajisho5/agent-instruction-hygiene --uninstall     # remove from the selected targets
+```
+
+Already installed? Re-run the same command to refresh — copies aren't updated automatically.
+
+Once a version has been published to npm (see [Releasing](#releasing) below), the shorter form
+also works, with the same flags:
+
+```bash
+npx agent-instruction-hygiene
+```
+
+Or copy it in by hand, for any agent that reads a `SKILL.md` off disk:
 
 ```bash
 git clone https://github.com/kajisho5/agent-instruction-hygiene
-cp -r agent-instruction-hygiene/SKILL.md agent-instruction-hygiene/references ~/.claude/skills/agent-instruction-hygiene/
+cp -r agent-instruction-hygiene/SKILL.md agent-instruction-hygiene/references <your-agent's-skills-directory>/agent-instruction-hygiene/
 ```
 
 ## The six patterns, at a glance
@@ -59,6 +84,19 @@ cp -r agent-instruction-hygiene/SKILL.md agent-instruction-hygiene/references ~/
 6. **Define "done" before the task starts.** State explicitly whether the first working pass is the finish line or the starting point.
 
 Full detail, examples, and the audit workflow: [`SKILL.md`](SKILL.md).
+
+## Releasing
+
+Bump the `version` field in `package.json` (and `.claude-plugin/plugin.json` to match) in a PR
+and merge it to `main`. [`.github/workflows/publish.yml`](.github/workflows/publish.yml) then
+compares that version against what's currently on npm and, if it's newer, runs `npm publish`,
+tags the commit `vX.Y.Z`, and creates a GitHub Release — no manual `npm publish` needed.
+
+This needs an `NPM_TOKEN` repository secret (an npm access token with publish rights on this
+package): **Settings → Secrets and variables → Actions →
+[New repository secret](https://github.com/kajisho5/agent-instruction-hygiene/settings/secrets/actions/new)**.
+Without it, the workflow's publish step fails (a tag/release is only created for a successful
+publish) and the package stays install-only via `npx github:kajisho5/agent-instruction-hygiene`.
 
 ## Contributing
 
